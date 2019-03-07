@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="da" class="">
+<head>
+	<style>
+		.row {
+			display: table;
+		}
+
+		.cell {
+			border: black solid 1px;
+			width: 100px;
+			height: 100px;
+			display: table-cell;
+			border-collapse: collapse;
+			text-align: center;
+			vertical-align: middle;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+<div class="row">
+	<div class="cell" data-cell-id="1">1</div>
+	<div class="cell" data-cell-id="2">2</div>
+	<div class="cell" data-cell-id="3">3</div>
+	<div class="cell" data-cell-id="4">4</div>
+</div>
+<div class="row">
+	<div class="cell" data-cell-id="5">5</div>
+	<div class="cell" data-cell-id="6">6</div>
+	<div class="cell" data-cell-id="7">7</div>
+	<div class="cell" data-cell-id="8">8</div>
+</div>
+<div class="row">
+	<div class="cell" data-cell-id="9">9</div>
+	<div class="cell" data-cell-id="10">10</div>
+	<div class="cell" data-cell-id="11">11</div>
+	<div class="cell" data-cell-id="12">12</div>
+</div>
+<div class="row">
+	<div class="cell" data-cell-id="13">13</div>
+	<div class="cell" data-cell-id="14">14</div>
+	<div class="cell" data-cell-id="15">15</div>
+	<div class="cell" data-cell-id="16"></div>
+</div>
+</body>
+</html>
+
+<script>
+	var cell_div = document.getElementsByClassName('cell')[0];
+	cell_div.addEventListener('click', function (event) {
+
+	});
+</script>

@@ -1,0 +1,14 @@
+.row {
+	display: table;
+}
+
+.cell {
+	border: black solid 1px;
+	width: 100px;
+	height: 100px;
+	display: table-cell;
+	border-collapse: collapse;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+}
