@@ -19,36 +19,124 @@
 	</style>
 </head>
 <body>
-<div class="row">
-	<div class="cell" data-cell-id="1">1</div>
-	<div class="cell" data-cell-id="2">2</div>
-	<div class="cell" data-cell-id="3">3</div>
-	<div class="cell" data-cell-id="4">4</div>
-</div>
-<div class="row">
-	<div class="cell" data-cell-id="5">5</div>
-	<div class="cell" data-cell-id="6">6</div>
-	<div class="cell" data-cell-id="7">7</div>
-	<div class="cell" data-cell-id="8">8</div>
-</div>
-<div class="row">
-	<div class="cell" data-cell-id="9">9</div>
-	<div class="cell" data-cell-id="10">10</div>
-	<div class="cell" data-cell-id="11">11</div>
-	<div class="cell" data-cell-id="12">12</div>
-</div>
-<div class="row">
-	<div class="cell" data-cell-id="13">13</div>
-	<div class="cell" data-cell-id="14">14</div>
-	<div class="cell" data-cell-id="15">15</div>
-	<div class="cell" data-cell-id="16"></div>
-</div>
+	<div>
+		<input type="button" value="Refresh" onclick="refresh();" />
+	</div>
+	<div class="row">
+		<div class="cell" data-x="0" data-y="0">1</div>
+		<div class="cell" data-x="1" data-y="0">2</div>
+		<div class="cell" data-x="2" data-y="0">3</div>
+		<div class="cell" data-x="3" data-y="0">4</div>
+	</div>
+	<div class="row">
+		<div class="cell" data-x="0" data-y="1">5</div>
+		<div class="cell" data-x="1" data-y="1">6</div>
+		<div class="cell" data-x="2" data-y="1">7</div>
+		<div class="cell" data-x="3" data-y="1">8</div>
+	</div>
+	<div class="row">
+		<div class="cell" data-x="0" data-y="2">9</div>
+		<div class="cell" data-x="1" data-y="2">10</div>
+		<div class="cell" data-x="2" data-y="2">11</div>
+		<div class="cell" data-x="3" data-y="2">12</div>
+	</div>
+	<div class="row">
+		<div class="cell" data-x="0" data-y="3">13</div>
+		<div class="cell" data-x="1" data-y="3">14</div>
+		<div class="cell" data-x="2" data-y="3">15</div>
+		<div class="cell" data-x="3" data-y="3"></div>
+	</div>
 </body>
 </html>
 
 <script>
-	var cell_div = document.getElementsByClassName('cell')[0];
-	cell_div.addEventListener('click', function (event) {
+	var emptyPosition = {
+		x: 3,
+		y: 3
+	}
 
-	});
+	var cells = document.getElementsByClassName('cell');
+
+	function onCellClick() {
+
+		if (Math.abs(this.dataset.x - emptyPosition.x) + Math.abs(this.dataset.y - emptyPosition.y) !== 1) {
+			return;
+		}
+
+		var selectors = '[data-x="{x}"][data-y="{y}"]'
+			.replace("{x}", emptyPosition.x)
+			.replace("{y}", emptyPosition.y);
+
+		var emptyCellDiv = document.querySelector(selectors);
+
+		emptyCellDiv.innerHTML = this.innerHTML;
+		this.innerHTML = '';
+
+		emptyPosition.x = this.dataset.x;
+		emptyPosition.y = this.dataset.y;
+	};
+
+	for (var i = 0; i < cells.length; i++) {
+		cells[i].addEventListener('click', onCellClick);
+	}
+
+	var initialDataCells = [
+		{ x: 0, y: 0 },
+		{ x: 1, y: 0 },
+		{ x: 2, y: 0 },
+		{ x: 3, y: 0 },
+		{ x: 0, y: 1 },
+		{ x: 1, y: 1 },
+		{ x: 2, y: 1 },
+		{ x: 3, y: 1 },
+		{ x: 0, y: 2 },
+		{ x: 1, y: 2 },
+		{ x: 2, y: 2 },
+		{ x: 3, y: 2 },
+		{ x: 0, y: 3 },
+		{ x: 1, y: 3 },
+		{ x: 2, y: 3 },
+		{ x: 3, y: 3 }
+	];
+
+	function refresh() {
+
+		var dataCells = initialDataCells.slice();
+		for (var i = 0; i < 16; i++) {
+
+			var index = Math.floor(dataCells.length * Math.random());
+
+			var cellItem = dataCells[index];
+
+			var selectors = '[data-x="{x}"][data-y="{y}"]'
+				.replace("{x}", cellItem.x)
+				.replace("{y}", cellItem.y);
+
+			var emptyCellDiv = document.querySelector(selectors);
+
+			if (i === 0) {
+				emptyCellDiv.innerHTML = '';
+				emptyPosition = cellItem;
+			} else {
+				emptyCellDiv.innerHTML = i;
+			}
+
+			dataCells.splice(index, 1);
+		}
+
+		//for (var i = 0; i < 4; i++) {
+
+		//	for (var j = 0; j < 4; j++) {
+		//		var selectors = '[data-x="{x}"][data-y="{y}"]'
+		//			.replace("{x}", i)
+		//			.replace("{y}", j);
+
+		//		var emptyCellDiv = document.querySelector(selectors);
+		//		emptyCellDiv.innerHTML = this.innerHTML;
+		//	}
+		//}
+
+	}
+
+	refresh();
 </script>
