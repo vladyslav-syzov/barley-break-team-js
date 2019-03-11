@@ -50,6 +50,15 @@
 </html>
 
 <script>
+	/*
+		Don't mix html/css/js in one file even if task is small
+
+		Mix of core code and function declarations
+		Code at the top
+		Declarations at the bottom
+
+		Not finished. Don't have win condition check
+	*/
 	var emptyPosition = {
 		x: 3,
 		y: 3
@@ -63,6 +72,10 @@
 			return;
 		}
 
+		/*
+			You won't need this if you save empty cell as html element
+			instead of saving position
+		*/
 		var selectors = '[data-x="{x}"][data-y="{y}"]'
 			.replace("{x}", emptyPosition.x)
 			.replace("{y}", emptyPosition.y);
@@ -80,6 +93,10 @@
 		cells[i].addEventListener('click', onCellClick);
 	}
 
+	/*
+		Duplication of data storing
+		You don't need this array as long as you keep indexes in the dataset of your elements
+	*/
 	var initialDataCells = [
 		{ x: 0, y: 0 },
 		{ x: 1, y: 0 },
@@ -100,8 +117,8 @@
 	];
 
 	function refresh() {
-
 		var dataCells = initialDataCells.slice();
+		
 		for (var i = 0; i < 16; i++) {
 
 			var index = Math.floor(dataCells.length * Math.random());
@@ -112,6 +129,9 @@
 				.replace("{x}", cellItem.x)
 				.replace("{y}", cellItem.y);
 
+			/*
+				Misleading 'empty' prefix in the name
+			*/
 			var emptyCellDiv = document.querySelector(selectors);
 
 			if (i === 0) {
@@ -121,6 +141,10 @@
 				emptyCellDiv.innerHTML = i;
 			}
 
+			/*
+				You accessed dataCells[index] above and now you do the splice
+				You could do splice there and use the value it returns
+			*/
 			dataCells.splice(index, 1);
 		}
 
