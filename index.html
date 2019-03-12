@@ -15,6 +15,22 @@
 			text-align: center;
 			vertical-align: middle;
 			cursor: pointer;
+			background: cadetblue;
+			font-size: xx-large;
+		}
+
+		.empty-cell{
+			background: white;
+		}
+
+		input[type=button] {
+			padding:5px 15px; 
+			background:#ccc; 
+			border:0 none;
+			cursor:pointer;
+			-webkit-border-radius: 5px;
+			border-radius: 5px; 
+    		margin: 10px 0px 10px 0px;
 		}
 	</style>
 </head>
@@ -123,19 +139,6 @@
 
 			dataCells.splice(index, 1);
 		}
-
-		//for (var i = 0; i < 4; i++) {
-
-		//	for (var j = 0; j < 4; j++) {
-		//		var selectors = '[data-x="{x}"][data-y="{y}"]'
-		//			.replace("{x}", i)
-		//			.replace("{y}", j);
-
-		//		var emptyCellDiv = document.querySelector(selectors);
-		//		emptyCellDiv.innerHTML = this.innerHTML;
-		//	}
-		//}
-
 	}
 
 	refresh();
