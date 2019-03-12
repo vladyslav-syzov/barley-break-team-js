@@ -1,19 +1,14 @@
 function checkResult() {
-
 	var result = "";
 
 	for (var y = 0; y < 4; y++) {
 
 		for (var x = 0; x < 4; x++) {
 
-			var selectors = '[data-x="{x}"][data-y="{y}"]'
-				.replace("{x}", x)
-				.replace("{y}", y);
-			var cell = document.querySelector(selectors);
+			var cell = document.querySelector(prepareSelector(x, y));
 
 			result += cell.innerHTML + ',';
 		}
-
 	}
 
 	return result === "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,,";
@@ -24,17 +19,18 @@ var emptyPosition = {
 	y: 3
 };
 
-function onCellClick() {
+function prepareSelector(x, y) {
+	return '[data-x="{x}"][data-y="{y}"]'
+		.replace("{x}", x)
+		.replace("{y}", y);
+}
 
+function onCellClick() {
 	if (Math.abs(this.dataset.x - emptyPosition.x) + Math.abs(this.dataset.y - emptyPosition.y) !== 1) {
 		return;
 	}
 
-	var selectors = '[data-x="{x}"][data-y="{y}"]'
-		.replace("{x}", emptyPosition.x)
-		.replace("{y}", emptyPosition.y);
-
-	var emptyCellDiv = document.querySelector(selectors);
+	var emptyCellDiv = document.querySelector(prepareSelector(emptyPosition.x, emptyPosition.y));
 
 	emptyCellDiv.innerHTML = this.innerHTML;
 	this.innerHTML = '';
@@ -74,11 +70,7 @@ function refresh() {
 
 		var cellItem = dataCells[index];
 
-		var selectors = '[data-x="{x}"][data-y="{y}"]'
-			.replace("{x}", cellItem.x)
-			.replace("{y}", cellItem.y);
-
-		var emptyCellDiv = document.querySelector(selectors);
+		var emptyCellDiv = document.querySelector(prepareSelector(cellItem.x, cellItem.y));
 
 		if (i === 0) {
 			emptyCellDiv.innerHTML = '';
@@ -94,7 +86,6 @@ function refresh() {
 document.addEventListener('DOMContentLoaded', init, false);
 
 function init() {
-
 	var cells = document.getElementsByClassName('cell');
 
 	for (var i = 0; i < cells.length; i++) {
